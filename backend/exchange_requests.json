@@ -1,0 +1,468 @@
+[
+  {
+    "exchangeId": "EX1784633612345",
+    "createdAt": "2026-07-21T11:33:32.345Z",
+    "status": "Replacement Shipped",
+    "orderId": 6788567007455,
+    "lineItemId": 16386252439775,
+    "productId": 9441038237919,
+    "variantId": 50543018705119,
+    "currentSize": "S",
+    "newSize": "M",
+    "reason": "Size Too Small",
+    "adminNotes": "",
+    "customerNotes": "",
+    "timeline": [
+      {
+        "status": "Pickup Scheduled",
+        "date": "2026-07-22T12:13:54.009Z",
+        "by": "Admin"
+      },
+      {
+        "status": "Picked Up",
+        "date": "2026-07-22T12:14:00.390Z",
+        "by": "Admin"
+      },
+      {
+        "status": "Received",
+        "date": "2026-07-22T12:14:05.376Z",
+        "by": "Admin"
+      },
+      {
+        "status": "Replacement Packed",
+        "date": "2026-07-22T12:14:08.915Z",
+        "by": "Admin"
+      },
+      {
+        "status": "Replacement Shipped",
+        "date": "2026-07-22T12:14:16.345Z",
+        "by": "Admin"
+      }
+    ]
+  },
+  {
+    "exchangeId": "EX1784637599947",
+    "createdAt": "2026-07-21T12:39:59.947Z",
+    "status": "Delivered",
+    "orderId": 6776881938655,
+    "orderNumber": "108068",
+    "customerEmail": "harshitagarwal2107@gmail.com",
+    "productId": 8971215765727,
+    "productTitle": "Don't give a f#ck Eminem Stonewash Oversized T-shirt",
+    "productImage": "https://cdn.shopify.com/s/files/1/0740/5685/9871/files/Dont-give-a-fuck-stonewash-oversized-t-shirt.jpg?v=1738676478",
+    "lineItemId": 16361960407263,
+    "variantId": 46731627036895,
+    "currentSize": "S / Black Stonewash",
+    "newSize": "L",
+    "reason": "Size Too Small",
+    "adminNotes": "",
+    "customerNotes": "",
+    "timeline": [
+      {
+        "status": "Pickup Scheduled",
+        "date": "2026-07-22T11:57:24.069Z",
+        "by": "Admin"
+      },
+      {
+        "status": "Picked Up",
+        "date": "2026-07-22T11:57:40.739Z",
+        "by": "Admin"
+      },
+      {
+        "status": "Received",
+        "date": "2026-07-22T11:57:46.297Z",
+        "by": "Admin"
+      },
+      {
+        "status": "Replacement Packed",
+        "date": "2026-07-22T11:58:00.934Z",
+        "by": "Admin"
+      },
+      {
+        "status": "Replacement Shipped",
+        "date": "2026-07-22T11:58:05.661Z",
+        "by": "Admin"
+      },
+      {
+        "status": "Delivered",
+        "date": "2026-07-22T11:58:09.598Z",
+        "by": "Admin"
+      }
+    ]
+  },
+  {
+    "exchangeId": "EX1784723900017",
+    "createdAt": "2026-07-22T12:38:20.017Z",
+    "status": "Picked Up",
+    "orderId": 6781354705119,
+    "orderNumber": "108072",
+    "customerEmail": "abhayzolo@gmail.com",
+    "productId": 8971217240287,
+    "productTitle": "Plain Oversized T-shirt Heavyweight 240 GSM",
+    "productImage": "https://cdn.shopify.com/s/files/1/0740/5685/9871/files/Plain-oversized-T-shirt-240-GSM.jpg?v=1779007936",
+    "lineItemId": 16371104121055,
+    "variantId": 46731633787103,
+    "currentSize": "XL / Navy Blue",
+    "newSize": "L",
+    "reason": "Size Too Small",
+    "adminNotes": "",
+    "customerNotes": "",
+    "courierName": "Delhivery",
+    "pickupDate": "",
+    "pickupTime": "",
+    "trackingNumber": "",
+    "trackingUrl": "",
+    "timeline": [
+      {
+        "status": "Pending",
+        "date": "2026-07-22T12:38:20.017Z",
+        "by": "Customer"
+      },
+      {
+        "status": "Pickup Scheduled",
+        "date": "2026-07-22T12:38:40.499Z",
+        "by": "Admin"
+      },
+      {
+        "status": "Picked Up",
+        "date": "2026-07-22T12:38:54.692Z",
+        "by": "Admin"
+      }
+    ]
+  },
+  {
+    "exchangeId": "EX1784724546337",
+    "createdAt": "2026-07-22T12:49:06.337Z",
+    "status": "Picked Up",
+    "orderId": 6793305882847,
+    "orderNumber": "108087",
+    "customerEmail": "dp3173620@gmail.com",
+    "productId": 9363084247263,
+    "productTitle": "Crunk Thread Y2k Relaxed Loose Fit Jogger",
+    "productImage": "https://cdn.shopify.com/s/files/1/0740/5685/9871/files/crunk-thread-y2k-logo-relaxe-loose-jogger.jpg?v=1777897782",
+    "lineItemId": 16396517474527,
+    "variantId": 49069194019039,
+    "currentSize": "S / Black",
+    "newSize": "L",
+    "reason": "Size Too Small",
+    "adminNotes": "",
+    "customerNotes": "",
+    "courierName": "Delhivery",
+    "pickupDate": "",
+    "pickupTime": "",
+    "trackingNumber": "",
+    "trackingUrl": "",
+    "timeline": [
+      {
+        "status": "Pending",
+        "date": "2026-07-22T12:49:06.337Z",
+        "by": "Customer"
+      },
+      {
+        "status": "Pickup Scheduled",
+        "date": "2026-07-22T12:49:20.336Z",
+        "by": "Admin"
+      },
+      {
+        "status": "Picked Up",
+        "date": "2026-07-22T12:49:36.865Z",
+        "by": "Admin"
+      }
+    ]
+  },
+  {
+    "exchangeId": "EX1784724850616",
+    "createdAt": "2026-07-22T12:54:10.616Z",
+    "status": "Pickup Scheduled",
+    "orderId": 6792312226015,
+    "orderNumber": "108086",
+    "customerEmail": "hheyybabbyy@gmail.com",
+    "productId": 8971126571231,
+    "productTitle": "Namaste Motherfuckers Men's Printed T-shirt",
+    "productImage": "https://cdn.shopify.com/s/files/1/0740/5685/9871/files/namaste-b-min.jpg?v=1742378642",
+    "lineItemId": 16394298097887,
+    "variantId": 46731277631711,
+    "currentSize": "L / Red",
+    "newSize": "XL",
+    "reason": "Size Too Small",
+    "adminNotes": "",
+    "customerNotes": "",
+    "courierName": "Delhivery",
+    "pickupDate": "",
+    "pickupTime": "",
+    "trackingNumber": "",
+    "trackingUrl": "",
+    "timeline": [
+      {
+        "status": "Pending",
+        "date": "2026-07-22T12:54:10.616Z",
+        "by": "Customer"
+      },
+      {
+        "status": "Pickup Scheduled",
+        "date": "2026-07-22T12:54:22.668Z",
+        "by": "Admin"
+      }
+    ]
+  },
+  {
+    "exchangeId": "EX1784754864103",
+    "createdAt": "2026-07-22T21:14:24.103Z",
+    "status": "Pickup Scheduled",
+    "orderId": 6806786638047,
+    "orderNumber": "108098",
+    "customerEmail": "himanshupandey70@yahoo.com",
+    "productId": 9446702481631,
+    "productTitle": "Plain Black Boxy Fit Unstitched Raw Hem T-Shirt",
+    "productImage": "https://cdn.shopify.com/s/files/1/0740/5685/9871/files/BLACK-PLAIN-BOXY-FIT-FRONT.jpg?v=1784110096",
+    "lineItemId": 16416655409375,
+    "variantId": 50571327865055,
+    "currentSize": "M",
+    "newSize": "L",
+    "reason": "Size Too Small",
+    "adminNotes": "",
+    "customerNotes": "",
+    "courierName": "Delhivery",
+    "pickupDate": "",
+    "pickupTime": "",
+    "trackingNumber": "",
+    "trackingUrl": "",
+    "timeline": [
+      {
+        "status": "Pending",
+        "date": "2026-07-22T21:14:24.103Z",
+        "by": "Customer"
+      },
+      {
+        "status": "Pickup Scheduled",
+        "date": "2026-07-22T21:14:43.018Z",
+        "by": "Admin"
+      }
+    ]
+  },
+  {
+    "exchangeId": "EX1784756370519",
+    "createdAt": "2026-07-22T21:39:30.519Z",
+    "status": "Pickup Scheduled",
+    "orderId": 6806813999327,
+    "orderNumber": "108099",
+    "customerEmail": "himx06@gmail.com",
+    "productId": 9441038237919,
+    "productTitle": "Crunk Thread Be My Six Vintage Fade Oversized T-shirt",
+    "productImage": "https://cdn.shopify.com/s/files/1/0740/5685/9871/files/be-my-six-and-i_ll-be-your-nine-vinatage-fade-oversized-T-shirt-Back.jpg?v=1783602101",
+    "lineItemId": 16416723501279,
+    "variantId": 50543018737887,
+    "currentSize": "M",
+    "newSize": "L",
+    "reason": "Size Too Small",
+    "adminNotes": "",
+    "customerNotes": "",
+    "courierName": "Delhivery",
+    "pickupDate": "",
+    "pickupTime": "",
+    "trackingNumber": "",
+    "trackingUrl": "",
+    "timeline": [
+      {
+        "status": "Pending",
+        "date": "2026-07-22T21:39:30.519Z",
+        "by": "Customer"
+      },
+      {
+        "status": "Pickup Scheduled",
+        "date": "2026-07-22T21:45:17.395Z",
+        "by": "Admin"
+      }
+    ]
+  },
+  {
+    "exchangeId": "EX1784759038101",
+    "createdAt": "2026-07-22T22:23:58.101Z",
+    "status": "Pickup Scheduled",
+    "orderId": 6806862266591,
+    "orderNumber": "108100",
+    "customerEmail": "himpan1@gmail.com",
+    "productId": 9446702481631,
+    "productTitle": "Plain Black Boxy Fit Unstitched Raw Hem T-Shirt",
+    "productImage": "https://cdn.shopify.com/s/files/1/0740/5685/9871/files/BLACK-PLAIN-BOXY-FIT-FRONT.jpg?v=1784110096",
+    "lineItemId": 16416850837727,
+    "variantId": 50571327897823,
+    "currentSize": "L",
+    "newSize": "XL",
+    "reason": "Size Too Small",
+    "adminNotes": "",
+    "customerNotes": "",
+    "courierName": "Delhivery",
+    "pickupDate": "",
+    "pickupTime": "",
+    "trackingNumber": "",
+    "trackingUrl": "",
+    "timeline": [
+      {
+        "status": "Pending",
+        "date": "2026-07-22T22:23:58.101Z",
+        "by": "Customer"
+      },
+      {
+        "status": "Pickup Scheduled",
+        "date": "2026-07-22T22:24:47.804Z",
+        "by": "Admin"
+      }
+    ]
+  },
+  {
+    "exchangeId": "EX1784759553389",
+    "createdAt": "2026-07-22T22:32:33.389Z",
+    "status": "Delivered",
+    "orderId": 6806870589663,
+    "orderNumber": "108101",
+    "customerEmail": "himx06@gmail.com",
+    "productId": 9441038237919,
+    "productTitle": "Crunk Thread Be My Six Vintage Fade Oversized T-shirt",
+    "productImage": "https://cdn.shopify.com/s/files/1/0740/5685/9871/files/be-my-six-and-i_ll-be-your-nine-vinatage-fade-oversized-T-shirt-Back.jpg?v=1783602101",
+    "lineItemId": 16416874332383,
+    "variantId": 50543018770655,
+    "currentSize": "L",
+    "newSize": "XL",
+    "reason": "Size Too Small",
+    "adminNotes": "",
+    "customerNotes": "",
+    "courierName": "Delhivery",
+    "pickupDate": "",
+    "pickupTime": "",
+    "trackingNumber": "3383883838383",
+    "trackingUrl": "https://deljivery.com",
+    "timeline": [
+      {
+        "status": "Pending",
+        "date": "2026-07-22T22:32:33.389Z",
+        "by": "Customer"
+      },
+      {
+        "status": "Pickup Scheduled",
+        "date": "2026-07-22T22:32:53.108Z",
+        "by": "Admin"
+      },
+      {
+        "status": "Picked Up",
+        "date": "2026-07-22T23:16:53.385Z",
+        "by": "Admin"
+      },
+      {
+        "status": "Received",
+        "date": "2026-07-22T23:17:02.499Z",
+        "by": "Admin"
+      },
+      {
+        "status": "Replacement Packed",
+        "date": "2026-07-22T23:17:11.834Z",
+        "by": "Admin"
+      },
+      {
+        "status": "Replacement Shipped",
+        "date": "2026-07-22T23:17:40.276Z",
+        "by": "Admin"
+      },
+      {
+        "status": "Delivered",
+        "date": "2026-07-22T23:18:07.897Z",
+        "by": "Admin"
+      }
+    ]
+  },
+  {
+    "exchangeId": "EX1784760009434",
+    "createdAt": "2026-07-22T22:40:09.434Z",
+    "status": "Delivered",
+    "orderId": 6806877733087,
+    "orderNumber": "108102",
+    "customerEmail": "himx06@gmail.com",
+    "productId": 9428898513119,
+    "productTitle": "Enlightened Waffle Knit Boxy Fit T-shirt",
+    "productImage": "https://cdn.shopify.com/s/files/1/0740/5685/9871/files/Enlightened-waffle-knit-boxy-t-shirt.jpg?v=1782898526",
+    "lineItemId": 16416891011295,
+    "variantId": 50466440741087,
+    "currentSize": "XL",
+    "newSize": "L",
+    "reason": "Size Too Small",
+    "adminNotes": "",
+    "customerNotes": "",
+    "courierName": "Delhivery",
+    "pickupDate": "2026-07-02",
+    "pickupTime": "10:27",
+    "trackingNumber": "344444499994444",
+    "trackingUrl": "https://delhivery.com/trackorder/84848488484",
+    "timeline": [
+      {
+        "status": "Pending",
+        "date": "2026-07-22T22:40:09.434Z",
+        "by": "Customer"
+      },
+      {
+        "status": "Approved",
+        "date": "2026-07-22T22:40:28.401Z",
+        "by": "Admin"
+      },
+      {
+        "status": "Pickup Scheduled",
+        "date": "2026-07-22T22:57:26.012Z",
+        "by": "Admin"
+      },
+      {
+        "status": "Picked Up",
+        "date": "2026-07-22T22:58:56.356Z",
+        "by": "Admin"
+      },
+      {
+        "status": "Received",
+        "date": "2026-07-22T23:00:43.935Z",
+        "by": "Admin"
+      },
+      {
+        "status": "Replacement Packed",
+        "date": "2026-07-22T23:00:49.970Z",
+        "by": "Admin"
+      },
+      {
+        "status": "Replacement Shipped",
+        "date": "2026-07-22T23:01:35.910Z",
+        "by": "Admin"
+      },
+      {
+        "status": "Delivered",
+        "date": "2026-07-22T23:05:12.667Z",
+        "by": "Admin"
+      }
+    ]
+  },
+  {
+    "exchangeId": "EX1784806277892",
+    "createdAt": "2026-07-23T11:31:17.892Z",
+    "status": "Pending",
+    "orderId": 6806877733087,
+    "orderNumber": "108102",
+    "customerEmail": "himx06@gmail.com",
+    "productId": 9428898513119,
+    "productTitle": "Enlightened Waffle Knit Boxy Fit T-shirt",
+    "productImage": "https://cdn.shopify.com/s/files/1/0740/5685/9871/files/Enlightened-waffle-knit-boxy-t-shirt.jpg?v=1782898526",
+    "lineItemId": 16416891011295,
+    "variantId": 50466440741087,
+    "currentSize": "XL",
+    "newSize": "L",
+    "reason": "Size Too Large",
+    "adminNotes": "",
+    "customerNotes": "",
+    "courierName": "",
+    "pickupDate": "",
+    "pickupTime": "",
+    "trackingNumber": "",
+    "trackingUrl": "",
+    "timeline": [
+      {
+        "status": "Pending",
+        "date": "2026-07-23T11:31:17.892Z",
+        "by": "Customer"
+      }
+    ]
+  }
+]
