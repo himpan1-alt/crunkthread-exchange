@@ -4,6 +4,15 @@ import { load } from "@cashfreepayments/cashfree-js";
 import { useState } from "react";
 import VerifyForm from "@/components/VerifyForm";
 import OrderItems from "@/components/OrderItems";
+import Image from "next/image";
+import { motion } from "framer-motion";
+import {
+  Clock3,
+  Ruler,
+  Tag,
+  Wallet,
+  CircleX,
+} from "lucide-react";
 const API_URL = process.env.NEXT_PUBLIC_API_URL!;
 
 type Order = {
@@ -279,17 +288,34 @@ setExchangeSuccess(true);
 
   return (
     
-    <main className="min-h-screen bg-gray-100 py-10 px-4">
+    <main className="min-h-screen bg-[#f5f5f2] py-12 px-4">
 
-      <div className="max-w-3xl mx-auto bg-white rounded-2xl shadow-xl p-8">
+  <div className="mx-auto max-w-3xl rounded-[32px] border border-neutral-200 bg-white p-10 shadow-[0_20px_60px_rgba(0,0,0,0.08)]">
 
-        <h1 className="text-3xl font-bold text-center">
-          CRUNK THREAD
-        </h1>
+        <div className="text-center mb-10">
 
-        <p className="text-center text-gray-500 mt-2">
-          Exchange Portal
-        </p>
+  <div className="flex justify-center mb-6">
+    <Image
+      src="/logo.png"
+      alt="Crunk Thread"
+      width={230}
+      height={76}
+      priority
+      className="h-auto w-auto"
+    />
+  </div>
+
+  <div className="mx-auto mt-2 mb-8 h-px w-20 bg-gradient-to-r from-transparent via-neutral-300 to-transparent" />
+
+  <h2 className="mt-2 text-3xl font-semibold tracking-[0.08em] text-neutral-900">
+    Official Exchange Portal
+  </h2>
+
+  <p className="mt-5 max-w-lg mx-auto text-[17px] leading-7 text-neutral-500">
+  Verify your order and submit a size exchange in just a few minutes.
+  </p>
+
+</div>
 
         <VerifyForm
           orderNumber={orderNumber}
@@ -300,46 +326,78 @@ setExchangeSuccess(true);
           onVerify={verifyOrder}
         />
 
-        <div className="mt-8 rounded-xl border border-gray-200 bg-white p-6">
-  <h3 className="text-lg font-semibold mb-4">
-    Important Information
-  </h3>
+        <div className="mt-10 rounded-3xl border border-neutral-200 bg-neutral-50 p-7">
 
-  <ul className="space-y-3 text-sm text-gray-700">
-    <li className="flex items-start gap-3">
-      <span>⏳</span>
-      <span>
-        Exchange requests must be submitted within <strong>7 days</strong> of
-        delivery.
-      </span>
-    </li>
+  <div className="flex items-center gap-3 mb-6">
+    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-black text-white text-lg">
+      !
+    </div>
 
-    <li className="flex items-start gap-3">
-      <span>✔</span>
-      <span>Size exchange only.</span>
-    </li>
+    <div>
+      <h3 className="text-xl font-semibold text-black">
+        Exchange Policy
+      </h3>
 
-    <li className="flex items-start gap-3">
-      <span>✔</span>
-      <span>
-        Product must be unused, unwashed, and in its original condition with
-        all tags attached.
-      </span>
-    </li>
+      <p className="text-sm text-neutral-500">
+        Please read before submitting your exchange request.
+      </p>
+    </div>
+  </div>
 
-    <li className="flex items-start gap-3">
-      <span>₹</span>
-      <span>
-        <strong>Exchanges are chargeable at Rs.199/-</strong> (Reverse pickup
-        and reshipping charge).
-      </span>
-    </li>
+  <div className="space-y-4">
 
-    <li className="flex items-start gap-3">
-      <span>❌</span>
-      <span>Customized products are not eligible for exchange.</span>
-    </li>
-  </ul>
+    <div className="flex items-start gap-4 rounded-2xl bg-white p-4">
+      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-neutral-100">
+        ⏳
+      </div>
+
+      <p className="text-[15px] leading-6 text-neutral-700">
+        Exchange requests must be submitted within <strong>7 days</strong> of delivery.
+      </p>
+    </div>
+
+    <div className="flex items-start gap-4 rounded-2xl bg-white p-4">
+      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-neutral-100">
+        📏
+      </div>
+
+      <p className="text-[15px] leading-6 text-neutral-700">
+        Size exchange only. Product design or colour cannot be changed.
+      </p>
+    </div>
+
+    <div className="flex items-start gap-4 rounded-2xl bg-white p-4">
+      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-neutral-100">
+        🏷
+      </div>
+
+      <p className="text-[15px] leading-6 text-neutral-700">
+        Product must be unused, unwashed and returned with all original tags.
+      </p>
+    </div>
+
+    <div className="flex items-start gap-4 rounded-2xl bg-white p-4">
+      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-neutral-100">
+        ₹
+      </div>
+
+      <p className="text-[15px] leading-6 text-neutral-700">
+        <strong>₹199 exchange fee</strong> includes reverse pickup and reshipping.
+      </p>
+    </div>
+
+    <div className="flex items-start gap-4 rounded-2xl bg-red-50 p-4 border border-red-100">
+      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-red-100">
+        ✕
+      </div>
+
+      <p className="text-[15px] leading-6 text-red-700">
+        Customized products are not eligible for exchange.
+      </p>
+    </div>
+
+  </div>
+
 </div>
 
         {message && (
