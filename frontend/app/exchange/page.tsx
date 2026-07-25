@@ -4,6 +4,7 @@ import { load } from "@cashfreepayments/cashfree-js";
 import { useState } from "react";
 import VerifyForm from "@/components/VerifyForm";
 import OrderItems from "@/components/OrderItems";
+const API_URL = process.env.NEXT_PUBLIC_API_URL!;
 
 type Order = {
   id: number;
@@ -58,18 +59,18 @@ export default function ExchangePage() {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/orders/verify-order",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            orderNumber,
-            email,
-          }),
-        }
-      );
+  `${API_URL}/api/orders/verify-order`,
+  {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      orderNumber,
+      email,
+    }),
+  }
+);
 
       const data = await response.json();
 
@@ -82,7 +83,7 @@ export default function ExchangePage() {
       setMessage("✅ Order verified successfully.");
 
       const itemsResponse = await fetch(
-        `http://localhost:5000/api/orders/${data.order.id}/items`
+        `${API_URL}/api/orders/${data.order.id}/items`
       );
 
       const itemsData = await itemsResponse.json();
@@ -108,7 +109,7 @@ export default function ExchangePage() {
   async function checkInventory(productId: number, size: string) {
     try {
       const response = await fetch(
-        "http://localhost:5000/api/inventory/check",
+        `${API_URL}/api/inventory/check`,
         {
           method: "POST",
           headers: {
@@ -146,7 +147,7 @@ async function startPayment() {
 
   try {
     const response = await fetch(
-      "http://localhost:5000/api/payment/create-order",
+      `${API_URL}/api/payment/create-order`,
       {
         method: "POST",
         headers: {
@@ -191,7 +192,7 @@ async function submitExchange() {
 
   try {
     const response = await fetch(
-      "http://localhost:5000/api/exchange/create",
+      `${API_URL}/api/exchange/create`,
       {
         method: "POST",
         headers: {
