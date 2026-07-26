@@ -475,80 +475,80 @@ setExchangeSuccess(true);
   </div>
 )}
 
-<div className="mt-10 rounded-3xl border border-neutral-200 bg-neutral-50 p-7">
+<div className="mt-12 overflow-hidden rounded-[32px] border border-neutral-200 bg-white">
 
-  <div className="flex items-center gap-3 mb-6">
-    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-black text-white text-lg">
-      !
-    </div>
+  <div className="px-10 pt-12 pb-10 text-center">
 
-    <div>
-      <h3 className="text-xl font-semibold text-black">
-        Exchange Policy
+  <span className="text-xs uppercase tracking-[0.45em] text-neutral-400">
+    POLICY
+  </span>
+
+  <h2 className="mt-4 text-5xl font-semibold tracking-tight text-black">
+    Exchange Policy
+  </h2>
+
+  <p className="mx-auto mt-5 max-w-2xl text-[16px] leading-8 text-neutral-500">
+    Please review these guidelines before submitting your exchange request.
+  </p>
+
+</div>
+
+  <div className="divide-y divide-neutral-100">
+
+    <div className="px-10 py-8">
+      <h3 className="text-lg font-semibold text-black">
+        7 Days Exchange Window.
       </h3>
 
-      <p className="text-sm text-neutral-500">
-        Please read before submitting your exchange request.
-      </p>
-    </div>
-  </div>
-
-  <div className="space-y-4">
-
-    <div className="flex items-start gap-4 rounded-2xl bg-white p-4">
-      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-neutral-100">
-        ⏳
-      </div>
-
-      <p className="text-[15px] leading-6 text-neutral-700">
+      <p className="mt-3 text-[15px] leading-7 text-neutral-500">
         Exchange requests must be submitted within <strong>7 days</strong> of delivery.
       </p>
     </div>
 
-    <div className="flex items-start gap-4 rounded-2xl bg-white p-4">
-      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-neutral-100">
-        📏
-      </div>
+    <div className="px-10 py-8">
+      <h3 className="text-lg font-semibold text-black">
+        Size Exchange Only
+      </h3>
 
-      <p className="text-[15px] leading-6 text-neutral-700">
-        Size exchange only. Product design or colour cannot be changed.
+      <p className="mt-3 text-[15px] leading-7 text-neutral-500">
+        Only size exchanges are allowed. Product design or colour cannot be changed.
       </p>
     </div>
 
-    <div className="flex items-start gap-4 rounded-2xl bg-white p-4">
-      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-neutral-100">
-        🏷
-      </div>
+    <div className="px-10 py-8">
+      <h3 className="text-lg font-semibold text-black">
+        Original Condition
+      </h3>
 
-      <p className="text-[15px] leading-6 text-neutral-700">
-        Product must be unused, unwashed and returned with all original tags.
+      <p className="mt-3 text-[15px] leading-7 text-neutral-500">
+        Products must be unused, unwashed and returned with all original tags.
       </p>
     </div>
 
-    <div className="flex items-start gap-4 rounded-2xl bg-white p-4">
-      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-neutral-100">
-        ₹
-      </div>
+    <div className="px-10 py-8">
+      <h3 className="text-lg font-semibold text-black">
+        Exchange Fee
+      </h3>
 
-      <p className="text-[15px] leading-6 text-neutral-700">
-        <strong>₹199 exchange fee</strong> includes reverse pickup and reshipping.
+      <p className="mt-3 text-[15px] leading-7 text-neutral-500">
+        ₹199 includes reverse pickup and reshipping.
       </p>
     </div>
 
-    <div className="flex items-start gap-4 rounded-2xl bg-red-50 p-4 border border-red-100">
-      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-red-100">
-        ✕
-      </div>
+    <div className="bg-red-50/60 px-10 py-8">
 
-      <p className="text-[15px] leading-6 text-red-700">
+      <h3 className="text-lg font-semibold text-red-700">
+        Not Eligible
+      </h3>
+
+      <p className="mt-3 text-[15px] leading-7 text-red-600">
         Customized products are not eligible for exchange.
       </p>
-    </div>
 
+    </div>
   </div>
 
 </div>
-
 
       </div>
       <div className="mt-12 border-t border-neutral-200 pt-8 text-center">
