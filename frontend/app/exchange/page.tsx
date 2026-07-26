@@ -505,6 +505,59 @@ setExchangeSuccess(true);
 )}
 
       </div>
+      <div className="mt-12 border-t border-neutral-200 pt-8 text-center">
+
+  <p className="text-sm text-neutral-500">
+    By continuing, you agree to our policies.
+  </p>
+
+  <div className="mt-4 flex flex-wrap items-center justify-center gap-4 text-sm">
+
+    <a
+      href="https://crunkthread.com/policies/refund-policy"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-black hover:underline"
+    >
+      Refund & Exchange Policy
+    </a>
+
+    <span className="text-neutral-300">•</span>
+
+    <a
+      href="https://crunkthread.com/policies/privacy-policy"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-black hover:underline"
+    >
+      Privacy Policy
+    </a>
+
+    <span className="text-neutral-300">•</span>
+
+    <a
+      href="https://crunkthread.com/policies/terms-of-service"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-black hover:underline"
+    >
+      Terms & Conditions
+    </a>
+
+    <span className="text-neutral-300">•</span>
+
+    <a
+      href="https://crunkthread.com/policies/shipping-policy"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-black hover:underline"
+    >
+      Shipping Policy
+    </a>
+
+  </div>
+
+</div>
     </main>
   );
 }
