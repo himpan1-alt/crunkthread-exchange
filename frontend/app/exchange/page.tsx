@@ -1,7 +1,7 @@
 "use client";
 
 import { load } from "@cashfreepayments/cashfree-js";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import VerifyForm from "@/components/VerifyForm";
 import OrderItems from "@/components/OrderItems";
 import Image from "next/image";
@@ -55,6 +55,8 @@ export default function ExchangePage() {
   const [exchangeSuccess, setExchangeSuccess] = useState(false);
   const [exchangeId, setExchangeId] = useState("");
 
+  const verifyResultRef = useRef<HTMLDivElement>(null);
+
   async function verifyOrder() {
     setLoading(true);
 
@@ -103,6 +105,13 @@ export default function ExchangePage() {
       }
 
       setItems(itemsData.items);
+      setTimeout(() => {
+  verifyResultRef.current?.scrollIntoView({
+    behavior: "smooth",
+    block: "start",
+  });
+}, 150);
+
     } catch (error) {
       console.error(error);
       setMessage("Something went wrong. Please try again.");
@@ -326,7 +335,147 @@ setExchangeSuccess(true);
           onVerify={verifyOrder}
         />
 
-        <div className="mt-10 rounded-3xl border border-neutral-200 bg-neutral-50 p-7">
+       <div ref={verifyResultRef}>
+  {message && (
+  <div className="mt-8 rounded-2xl border border-green-200 bg-green-50 p-5">
+
+    <div className="flex items-center gap-3">
+
+      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-green-600 text-white font-bold">
+        ✓
+      </div>
+
+      <div>
+
+        <h3 className="text-lg font-semibold text-green-800">
+          Order Verified Successfully
+        </h3>
+
+        <p className="text-sm text-green-700 mt-1">
+          Please select the product you want to exchange below.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+)}
+
+  {order && (
+  <div className="mt-3 rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-center">
+
+    <span className="text-sm text-gray-500">
+      Verified Order
+    </span>
+
+    <p className="mt-1 text-lg font-semibold text-black">
+      {order.name}
+    </p>
+
+  </div>
+)}
+</div>
+
+        
+  {step === 1 && items.length > 0 && (
+  <div id="products-section">
+    <OrderItems
+      items={items}
+      onSelect={handleSelectItem}
+      selectedItem={selectedItem}
+      selectedSize={selectedSize}
+      setSelectedSize={setSelectedSize}
+      stockStatus={stockStatus}
+      checkInventory={checkInventory}
+      reason={reason}
+      setReason={setReason}
+      otherReason={otherReason}
+      setOtherReason={setOtherReason}
+      onContinue={handleContinue}
+    />
+  </div>
+)}
+
+{step === 2 && (
+  <div className="mt-8 rounded-2xl border border-gray-200 p-6">
+
+    <h2 className="text-2xl font-bold mb-6">
+      Review Exchange
+    </h2>
+
+    <div className="flex flex-col md:flex-row gap-6">
+
+      <div className="w-40">
+        {selectedItem?.image && (
+          <img
+            src={selectedItem.image}
+            alt={selectedItem.title}
+            className="w-40 h-40 object-contain bg-gray-100 rounded-xl p-2"
+          />
+        )}
+
+
+
+      </div>
+
+      <div className="flex-1 space-y-3">
+
+        <h3 className="text-xl font-semibold">
+          {selectedItem?.title}
+        </h3>
+
+        <div className="grid grid-cols-2 gap-y-3">
+
+          <p>
+            <span className="font-semibold">
+              Current Size:
+            </span>{" "}
+            {selectedItem?.variantTitle}
+          </p>
+
+          <p>
+            <span className="font-semibold">
+              New Size:
+            </span>{" "}
+            {selectedSize}
+          </p>
+
+          <p className="col-span-2">
+            <span className="font-semibold">
+              Reason:
+            </span>{" "}
+            {reason === "Other" ? otherReason : reason}
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div className="mt-8 flex gap-4">
+
+      <button
+        onClick={() => setStep(1)}
+        className="flex-1 border rounded-xl py-3 font-semibold"
+      >
+        Back
+      </button>
+
+      <button
+  onClick={startPayment}
+  className="flex-1 bg-black text-white rounded-xl py-3 font-semibold"
+>
+  Pay ₹199 & Submit Exchange
+</button>
+
+    </div>
+
+  </div>
+)}
+
+<div className="mt-10 rounded-3xl border border-neutral-200 bg-neutral-50 p-7">
 
   <div className="flex items-center gap-3 mb-6">
     <div className="flex h-10 w-10 items-center justify-center rounded-full bg-black text-white text-lg">
@@ -400,109 +549,6 @@ setExchangeSuccess(true);
 
 </div>
 
-        {message && (
-          <div className="mt-6 text-center font-medium">
-            {message}
-          </div>
-        )}
-
-        {order && (
-          <div className="mt-3 text-center text-sm text-gray-500">
-            Order: {order.name}
-          </div>
-        )}
-
-        {step === 1 && items.length > 0 && (
-  <OrderItems
-    items={items}
-    onSelect={handleSelectItem}
-    selectedItem={selectedItem}
-    selectedSize={selectedSize}
-    setSelectedSize={setSelectedSize}
-    stockStatus={stockStatus}
-    checkInventory={checkInventory}
-    reason={reason}
-    setReason={setReason}
-    otherReason={otherReason}
-    setOtherReason={setOtherReason}
-    onContinue={handleContinue}
-  />
-)}
-
-{step === 2 && (
-  <div className="mt-8 rounded-2xl border border-gray-200 p-6">
-
-    <h2 className="text-2xl font-bold mb-6">
-      Review Exchange
-    </h2>
-
-    <div className="flex flex-col md:flex-row gap-6">
-
-      <div className="w-40">
-        {selectedItem?.image && (
-          <img
-            src={selectedItem.image}
-            alt={selectedItem.title}
-            className="w-40 h-40 object-contain bg-gray-100 rounded-xl p-2"
-          />
-        )}
-      </div>
-
-      <div className="flex-1 space-y-3">
-
-        <h3 className="text-xl font-semibold">
-          {selectedItem?.title}
-        </h3>
-
-        <div className="grid grid-cols-2 gap-y-3">
-
-          <p>
-            <span className="font-semibold">
-              Current Size:
-            </span>{" "}
-            {selectedItem?.variantTitle}
-          </p>
-
-          <p>
-            <span className="font-semibold">
-              New Size:
-            </span>{" "}
-            {selectedSize}
-          </p>
-
-          <p className="col-span-2">
-            <span className="font-semibold">
-              Reason:
-            </span>{" "}
-            {reason === "Other" ? otherReason : reason}
-          </p>
-
-        </div>
-
-      </div>
-
-    </div>
-
-    <div className="mt-8 flex gap-4">
-
-      <button
-        onClick={() => setStep(1)}
-        className="flex-1 border rounded-xl py-3 font-semibold"
-      >
-        Back
-      </button>
-
-      <button
-  onClick={startPayment}
-  className="flex-1 bg-black text-white rounded-xl py-3 font-semibold"
->
-  Pay ₹199 & Submit Exchange
-</button>
-
-    </div>
-
-  </div>
-)}
 
       </div>
       <div className="mt-12 border-t border-neutral-200 pt-8 text-center">
