@@ -467,7 +467,7 @@ setExchangeSuccess(true);
   onClick={startPayment}
   className="flex-1 bg-black text-white rounded-xl py-3 font-semibold"
 >
-  Pay ₹199 & Submit Exchange
+  Pay ₹149 & Submit Exchange
 </button>
 
     </div>
@@ -531,7 +531,7 @@ setExchangeSuccess(true);
       </h3>
 
       <p className="mt-3 text-[15px] leading-7 text-neutral-500">
-        ₹199 includes reverse pickup and reshipping.
+        ₹149 includes reverse pickup and reshipping.
       </p>
     </div>
 
