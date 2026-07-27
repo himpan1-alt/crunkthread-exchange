@@ -36,6 +36,7 @@ export default function ExchangePage() {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const [order, setOrder] = useState<Order | null>(null);
   const [items, setItems] = useState<OrderItem[]>([]);
@@ -58,35 +59,43 @@ export default function ExchangePage() {
   const verifyResultRef = useRef<HTMLDivElement>(null);
 
   async function verifyOrder() {
-    setLoading(true);
 
-    setMessage("");
-    setItems([]);
-    setSelectedItem(null);
-    setSelectedSize("");
-    setStockStatus(null);
-    setReason("");
-    setOtherReason("");
+  if (!orderNumber.trim() || !email.trim()) {
+    setMessage("Please enter your Order Number and Email Address.");
+    return;
+  }
+
+  setLoading(true);
+
+  setMessage("");
+  setErrorMessage("");
+  setItems([]);
+  setSelectedItem(null);
+  setSelectedSize("");
+  setStockStatus(null);
+  setReason("");
+  setOtherReason("");
 
     try {
-      const response = await fetch(
-  `${API_URL}/api/orders/verify-order`,
-  {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      orderNumber,
-      email,
-    }),
-  }
-);
+  const response = await fetch(
+    `${API_URL}/api/orders/verify-order`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        orderNumber,
+        email,
+      }),
+    }
+  );
 
-      const data = await response.json();
+  const data = await response.json();
+  console.log("VERIFY RESPONSE:", data);
 
       if (!data.success) {
-        setMessage(data.message || "Order verification failed.");
+        setErrorMessage(data.message || "Order verification failed.");
         return;
       }
 
@@ -299,28 +308,28 @@ setExchangeSuccess(true);
     
     <main className="min-h-screen bg-[#f5f5f2] py-12 px-4">
 
-  <div className="mx-auto max-w-3xl rounded-[32px] border border-neutral-200 bg-white p-10 shadow-[0_20px_60px_rgba(0,0,0,0.08)]">
+  <div className="mx-auto max-w-3xl rounded-2xl md:rounded-[32px] border border-neutral-200 bg-white p-5 sm:p-6 md:p-10 shadow-[0_20px_60px_rgba(0,0,0,0.08)]">
 
         <div className="text-center mb-10">
 
   <div className="flex justify-center mb-6">
     <Image
-      src="/logo.png"
-      alt="Crunk Thread"
-      width={230}
-      height={76}
-      priority
-      className="h-auto w-auto"
-    />
+  src="/logo.png"
+  alt="Crunk Thread"
+  width={230}
+  height={76}
+  priority
+  className="h-auto w-[170px] sm:w-[190px] md:w-[230px]"
+/>
   </div>
 
   <div className="mx-auto mt-2 mb-8 h-px w-20 bg-gradient-to-r from-transparent via-neutral-300 to-transparent" />
 
-  <h2 className="mt-2 text-3xl font-semibold tracking-[0.08em] text-neutral-900">
+  <h2 className="mt-2 text-2xl sm:text-3xl font-semibold tracking-[0.04em] md:tracking-[0.08em] text-neutral-900">
     Official Exchange Portal
   </h2>
 
-  <p className="mt-5 max-w-lg mx-auto text-[17px] leading-7 text-neutral-500">
+  <p className="mt-4 max-w-lg mx-auto text-[15px] sm:text-[16px] md:text-[17px] leading-7 text-neutral-500">
   Verify your order and submit a size exchange in just a few minutes.
   </p>
 
@@ -336,10 +345,15 @@ setExchangeSuccess(true);
         />
 
        <div ref={verifyResultRef}>
-  {message && (
-  <div className="mt-8 rounded-2xl border border-green-200 bg-green-50 p-5">
+        {errorMessage && (
+  <div className="mt-6 rounded-2xl border border-red-200 bg-red-50 p-4">
+    <p className="text-red-700">{errorMessage}</p>
+  </div>
+)}
+  {order && (
+  <div className="mt-6 rounded-2xl border border-green-200 bg-green-50 p-4 sm:p-5">
 
-    <div className="flex items-center gap-3">
+    <div className="flex flex-col sm:flex-row items-center gap-3 text-center sm:text-left">
 
       <div className="flex h-10 w-10 items-center justify-center rounded-full bg-green-600 text-white font-bold">
         ✓
@@ -363,13 +377,13 @@ setExchangeSuccess(true);
 )}
 
   {order && (
-  <div className="mt-3 rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-center">
+  <div className="mt-3 rounded-xl border border-gray-200 bg-gray-50 px-4 py-4 text-center">
 
     <span className="text-sm text-gray-500">
       Verified Order
     </span>
 
-    <p className="mt-1 text-lg font-semibold text-black">
+    <p className="mt-1 text-base sm:text-lg font-semibold text-black break-words">
       {order.name}
     </p>
 
@@ -477,13 +491,13 @@ setExchangeSuccess(true);
 
 <div className="mt-12 overflow-hidden rounded-[32px] border border-neutral-200 bg-white">
 
-  <div className="px-10 pt-12 pb-10 text-center">
+  <div className="px-5 sm:px-8 md:px-10 pt-10 md:pt-12 pb-8 md:pb-10 text-center">
 
   <span className="text-xs uppercase tracking-[0.45em] text-neutral-400">
     POLICY
   </span>
 
-  <h2 className="mt-4 text-5xl font-semibold tracking-tight text-black">
+  <h2 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-black">
     Exchange Policy
   </h2>
 
@@ -535,17 +549,17 @@ setExchangeSuccess(true);
       </p>
     </div>
 
-    <div className="bg-red-50/60 px-10 py-8">
+    <div className="bg-red-50/60 px-5 sm:px-8 md:px-10 py-6 md:py-8">
 
-      <h3 className="text-lg font-semibold text-red-700">
-        Not Eligible
-      </h3>
+  <h3 className="text-lg font-semibold text-red-700">
+    Not Eligible
+  </h3>
 
-      <p className="mt-3 text-[15px] leading-7 text-red-600">
-        Customized products are not eligible for exchange.
-      </p>
+  <p className="mt-3 text-[15px] leading-7 text-red-600">
+    Customized products are not eligible for exchange.
+  </p>
 
-    </div>
+</div>
   </div>
 
 </div>

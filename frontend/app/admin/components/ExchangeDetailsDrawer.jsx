@@ -337,8 +337,6 @@ const getTimelineDate = (status) => {
   setShowPickupModal(false);
   onClose();
       
-  setShowPickupModal(false);
-  onClose();
 }}
         className="flex-1 rounded-xl bg-green-600 py-3 font-semibold text-white hover:bg-green-700"
       >
