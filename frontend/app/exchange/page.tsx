@@ -493,25 +493,27 @@ setExchangeSuccess(true);
 
   <div className="px-5 sm:px-8 md:px-10 pt-10 md:pt-12 pb-8 md:pb-10 text-center">
 
-  <span className="text-xs uppercase tracking-[0.45em] text-neutral-400">
-    POLICY
-  </span>
+    <span className="text-xs uppercase tracking-[0.45em] text-neutral-400">
+      POLICY
+    </span>
 
-  <h2 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-black">
-    Exchange Policy
-  </h2>
+    <h2 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-black">
+      Exchange Policy
+    </h2>
 
-  <p className="mx-auto mt-5 max-w-2xl text-[16px] leading-8 text-neutral-500">
-    Please review these guidelines before submitting your exchange request.
-  </p>
+    <p className="mx-auto mt-5 max-w-2xl text-[16px] leading-8 text-neutral-500">
+      Please review these guidelines before submitting your exchange request.
+    </p>
 
-</div>
+    <div className="mx-auto mt-8 h-px w-24 bg-neutral-300"></div>
 
-  <div className="divide-y divide-neutral-100">
+  </div>
+
+  <div className="divide-y divide-neutral-200">
 
     <div className="px-10 py-8">
       <h3 className="text-lg font-semibold text-black">
-        7 Days Exchange Window.
+        7 Days Exchange Window
       </h3>
 
       <p className="mt-3 text-[15px] leading-7 text-neutral-500">
@@ -549,17 +551,18 @@ setExchangeSuccess(true);
       </p>
     </div>
 
-    <div className="bg-red-50/60 px-5 sm:px-8 md:px-10 py-6 md:py-8">
+    <div className="border-t border-red-200 bg-red-50/60 px-5 sm:px-8 md:px-10 py-6 md:py-8">
 
-  <h3 className="text-lg font-semibold text-red-700">
-    Not Eligible
-  </h3>
+      <h3 className="text-lg font-semibold text-red-700">
+        Not Eligible
+      </h3>
 
-  <p className="mt-3 text-[15px] leading-7 text-red-600">
-    Customized products are not eligible for exchange.
-  </p>
+      <p className="mt-3 text-[15px] leading-7 text-red-600">
+        Customized products are not eligible for exchange.
+      </p>
 
-</div>
+    </div>
+
   </div>
 
 </div>
