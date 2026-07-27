@@ -468,23 +468,23 @@ setExchangeSuccess(true);
 
     </div>
 
-    <div className="mt-8 flex gap-4">
+    <div className="mt-8 flex flex-col sm:flex-row gap-4">
 
-      <button
-        onClick={() => setStep(1)}
-        className="flex-1 border rounded-xl py-3 font-semibold"
-      >
-        Back
-      </button>
+  <button
+    onClick={() => setStep(1)}
+    className="w-full sm:flex-1 border border-black rounded-xl py-4 text-lg font-semibold"
+  >
+    Back
+  </button>
 
-      <button
-  onClick={startPayment}
-  className="flex-1 bg-black text-white rounded-xl py-3 font-semibold"
->
-  Pay ₹149 & Submit Exchange
-</button>
+  <button
+    onClick={startPayment}
+    className="w-full sm:flex-1 bg-black text-white rounded-xl py-4 text-lg font-semibold whitespace-nowrap"
+  >
+    Pay ₹149 & Submit Exchange
+  </button>
 
-    </div>
+</div>
 
   </div>
 )}
