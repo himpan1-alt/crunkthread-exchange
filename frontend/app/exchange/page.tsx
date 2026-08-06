@@ -1,6 +1,5 @@
 "use client";
 
-import { load } from "@cashfreepayments/cashfree-js";
 import { useState, useRef } from "react";
 import VerifyForm from "@/components/VerifyForm";
 import OrderItems from "@/components/OrderItems";
@@ -173,40 +172,82 @@ async function startPayment() {
   if (!selectedItem) return;
 
   try {
-    const response = await fetch(
-      `${API_URL}/api/payment/create-order`,
+    const response = await fetch(`${API_URL}/api/payment/create-order`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        orderNumber,
+        customerEmail: email,
+      }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok || !data.success) {
+      alert(data.message || "Unable to create payment.");
+      return;
+    }
+
+    const options = {
+      key: data.key,
+      amount: data.amount,
+      currency: data.currency,
+      order_id: data.orderId,
+
+      name: "Crunk Thread",
+      description: "Exchange Fee",
+
+      prefill: {
+        email,
+      },
+
+      theme: {
+        color: "#000000",
+      },
+
+      handler: async function (response: any) {
+  try {
+    const verifyResponse = await fetch(
+      `${API_URL}/api/payment/verify-payment`,
       {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          orderNumber,
-          customerEmail: email,
+          razorpay_order_id: response.razorpay_order_id,
+          razorpay_payment_id: response.razorpay_payment_id,
+          razorpay_signature: response.razorpay_signature,
         }),
       }
     );
 
-    const data = await response.json();
+    const verifyData = await verifyResponse.json();
 
-    if (!response.ok || !data.success) {
-      alert(data.message || "Unable to start payment.");
+    if (!verifyData.success) {
+      alert("Payment verification failed.");
       return;
     }
 
-    const cashfree = await load({
-      mode: "production",
-    });
+    await submitExchange();
 
-    if (!cashfree) {
-      alert("Unable to load Cashfree.");
-      return;
-    }
+  } catch (err) {
+    console.error(err);
+    alert("Unable to verify payment.");
+  }
+},
 
-    await cashfree.checkout({
-      paymentSessionId: data.paymentSessionId,
-      redirectTarget: "_modal",
-    });
+      modal: {
+        ondismiss: function () {
+          console.log("Payment cancelled");
+        },
+      },
+    };
+
+    const razorpay = new (window as any).Razorpay(options);
+    razorpay.open();
 
   } catch (err) {
     console.error(err);
@@ -481,7 +522,7 @@ setExchangeSuccess(true);
     onClick={startPayment}
     className="w-full sm:flex-1 bg-black text-white rounded-xl py-4 text-lg font-semibold whitespace-nowrap"
   >
-    Pay ₹149 & Submit Exchange
+    Pay <span className="font-sans">Rs.</span>149 &amp; Submit Exchange
   </button>
 
 </div>
@@ -547,7 +588,7 @@ setExchangeSuccess(true);
       </h3>
 
       <p className="mt-3 text-[15px] leading-7 text-neutral-500">
-        ₹149 includes reverse pickup and reshipping.
+        Rs.149 includes reverse pickup and reshipping.
       </p>
     </div>
 
