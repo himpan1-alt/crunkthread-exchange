@@ -1,46 +1,78 @@
+const crypto = require("crypto");
 const express = require("express");
-const { Cashfree, CFEnvironment } = require("cashfree-pg");
-
-const cashfree = new Cashfree(
-  process.env.CASHFREE_ENV === "PRODUCTION"
-    ? CFEnvironment.PRODUCTION
-    : CFEnvironment.SANDBOX,
-  process.env.CASHFREE_CLIENT_ID,
-  process.env.CASHFREE_CLIENT_SECRET
-);
+const Razorpay = require("razorpay");
 
 const router = express.Router();
 
+const razorpay = new Razorpay({
+  key_id: process.env.RAZORPAY_KEY_ID,
+  key_secret: process.env.RAZORPAY_KEY_SECRET,
+});
+
 router.post("/create-order", async (req, res) => {
   try {
-    const { orderNumber, customerEmail } = req.body;
-
-    const request = {
-      order_amount: 199,
-      order_currency: "INR",
-      order_id: `EX_${Date.now()}`,
-      customer_details: {
-        customer_id: orderNumber,
-        customer_email: customerEmail,
-        customer_phone: "9999999999",
+    const options = {
+      amount: 14900, // ₹149 in paise
+      currency: "INR",
+      receipt: `EX_${Date.now()}`,
+      notes: {
+        orderNumber: req.body.orderNumber,
+        customerEmail: req.body.customerEmail,
       },
-      order_meta: {},
     };
 
-    const response = await cashfree.PGCreateOrder(request);
+    const order = await razorpay.orders.create(options);
 
     res.json({
       success: true,
-      paymentSessionId: response.data.payment_session_id,
-      orderId: response.data.order_id,
+      orderId: order.id,
+      amount: order.amount,
+      currency: order.currency,
+      key: process.env.RAZORPAY_KEY_ID,
     });
-
   } catch (err) {
-    console.error(err.response?.data || err);
+    console.error(err);
 
     res.status(500).json({
       success: false,
-      message: "Unable to create payment order.",
+      message: "Unable to create Razorpay order.",
+    });
+  }
+});
+
+router.post("/verify-payment", (req, res) => {
+  try {
+    const {
+      razorpay_order_id,
+      razorpay_payment_id,
+      razorpay_signature,
+    } = req.body;
+
+    const body =
+      razorpay_order_id + "|" + razorpay_payment_id;
+
+    const expectedSignature = crypto
+      .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET)
+      .update(body.toString())
+      .digest("hex");
+
+    if (expectedSignature === razorpay_signature) {
+      return res.json({
+        success: true,
+      });
+    }
+
+    return res.status(400).json({
+      success: false,
+      message: "Payment verification failed.",
+    });
+
+  } catch (err) {
+    console.error(err);
+
+    return res.status(500).json({
+      success: false,
+      message: "Verification failed.",
     });
   }
 });

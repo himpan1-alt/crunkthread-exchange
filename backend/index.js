@@ -1,9 +1,15 @@
 require("dotenv").config();
 console.log("🔥 THIS IS THE INDEX.JS I'M RUNNING");
 
+
 const express = require("express");
 const cors = require("cors");
 const axios = require("axios");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
+const rateLimit = require("express-rate-limit");
+const helmet = require("helmet");
+const auth = require("./middleware/auth");
 
 const orderRoutes = require("./routes/orders");
 const inventoryRoutes = require("./routes/inventory");
@@ -27,6 +33,12 @@ app.use(
 );
 
 app.use(express.json());
+
+app.use(
+  helmet({
+    crossOriginResourcePolicy: false,
+  })
+);
 
 console.log("Store:", process.env.SHOPIFY_STORE);
 
@@ -148,6 +160,87 @@ app.use("/api/orders", orderRoutes);
 app.use("/api/inventory", inventoryRoutes);
 app.use("/api/exchange", exchangeRoutes);
 app.use("/api/payment", paymentRoutes);
+
+const adminLoginLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 5,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: {
+    success: false,
+    message:
+      "Too many login attempts. Please try again after 15 minutes.",
+  },
+});
+
+/* =========================
+   Admin Login
+========================= */
+
+app.post("/api/admin/login", adminLoginLimiter, async (req, res) => {
+  try {
+    const { username, password } = req.body;
+
+    const adminUsername = process.env.ADMIN_USERNAME;
+    const adminPasswordHash = process.env.ADMIN_PASSWORD_HASH;
+    const jwtSecret = process.env.JWT_SECRET;
+
+    if (!adminUsername || !adminPasswordHash || !jwtSecret) {
+      return res.status(500).json({
+        success: false,
+        message: "Admin authentication is not configured.",
+      });
+    }
+
+    if (username !== adminUsername) {
+      return res.status(401).json({
+        success: false,
+        message: "Invalid username or password.",
+      });
+    }
+
+    const passwordMatch = await bcrypt.compare(
+      password,
+      adminPasswordHash
+    );
+
+    if (!passwordMatch) {
+      return res.status(401).json({
+        success: false,
+        message: "Invalid username or password.",
+      });
+    }
+
+    const token = jwt.sign(
+  {
+    username,
+  },
+  process.env.JWT_SECRET,
+  {
+    expiresIn: "7d",
+  }
+);
+
+    return res.json({
+      success: true,
+      token,
+    });
+  } catch (err) {
+    console.error(err);
+
+    return res.status(500).json({
+      success: false,
+      message: "Server error.",
+    });
+  }
+});
+
+app.get("/api/admin/verify", auth, (req, res) => {
+  res.json({
+    success: true,
+    admin: req.admin,
+  });
+});
 
 /* =========================
    Test Email

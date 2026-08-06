@@ -464,5 +464,35 @@
         "by": "Customer"
       }
     ]
+  },
+  {
+    "exchangeId": "EX1786023229733",
+    "createdAt": "2026-08-06T13:33:49.733Z",
+    "status": "Pending",
+    "orderId": 6807593681119,
+    "orderNumber": "108103",
+    "customerEmail": "himx06@gmail.com",
+    "productId": 9446702481631,
+    "productTitle": "Plain Black Boxy Fit Unstitched Raw Hem T-Shirt",
+    "productImage": "https://cdn.shopify.com/s/files/1/0740/5685/9871/files/BLACK-PLAIN-BOXY-FIT-FRONT.jpg?v=1784110096",
+    "lineItemId": 16418385395935,
+    "variantId": 50571327865055,
+    "currentSize": "M",
+    "newSize": "L",
+    "reason": "Size Too Small",
+    "adminNotes": "",
+    "customerNotes": "",
+    "courierName": "",
+    "pickupDate": "",
+    "pickupTime": "",
+    "trackingNumber": "",
+    "trackingUrl": "",
+    "timeline": [
+      {
+        "status": "Pending",
+        "date": "2026-08-06T13:33:49.733Z",
+        "by": "Customer"
+      }
+    ]
   }
 ]

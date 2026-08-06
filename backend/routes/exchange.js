@@ -2,6 +2,7 @@ const express = require("express");
 const fs = require("fs");
 const path = require("path");
 const { sendEmail } = require("../services/emailService");
+const auth = require("../middleware/auth");
 
 const router = express.Router();
 
@@ -193,7 +194,7 @@ GET ALL EXCHANGES
 ========================================
 */
 
-router.get("/all", (req, res) => {
+router.get("/all", auth, (req, res) => {
   try {
     if (!fs.existsSync(filePath)) {
       return res.json([]);
@@ -222,7 +223,7 @@ UPDATE STATUS
 ========================================
 */
 
-router.put("/status/:exchangeId", async (req, res) => {
+router.put("/status/:exchangeId", auth, async (req, res) => {
 
   console.log("🔥 STATUS UPDATE API HIT");
 
