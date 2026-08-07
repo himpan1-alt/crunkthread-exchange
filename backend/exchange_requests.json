@@ -438,7 +438,7 @@
   {
     "exchangeId": "EX1784806277892",
     "createdAt": "2026-07-23T11:31:17.892Z",
-    "status": "Pending",
+    "status": "Approved",
     "orderId": 6806877733087,
     "orderNumber": "108102",
     "customerEmail": "himx06@gmail.com",
@@ -452,7 +452,7 @@
     "reason": "Size Too Large",
     "adminNotes": "",
     "customerNotes": "",
-    "courierName": "",
+    "courierName": "Delhivery",
     "pickupDate": "",
     "pickupTime": "",
     "trackingNumber": "",
@@ -462,6 +462,11 @@
         "status": "Pending",
         "date": "2026-07-23T11:31:17.892Z",
         "by": "Customer"
+      },
+      {
+        "status": "Approved",
+        "date": "2026-08-06T21:50:41.982Z",
+        "by": "Admin"
       }
     ]
   },

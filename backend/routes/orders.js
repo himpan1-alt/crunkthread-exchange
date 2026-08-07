@@ -1,3 +1,11 @@
+const fs = require("fs");
+const path = require("path");
+
+const exchangeFile = path.join(
+  __dirname,
+  "../exchange_requests.json"
+);
+
 const express = require("express");
 const router = express.Router();
 
@@ -80,6 +88,44 @@ console.log(
       });
     }
 
+    // ========================================
+// CHECK ACTIVE EXCHANGE REQUESTS
+// ========================================
+
+let exchanges = [];
+
+if (fs.existsSync(exchangeFile)) {
+  const data = fs.readFileSync(exchangeFile, "utf8");
+
+  if (data.trim()) {
+    exchanges = JSON.parse(data);
+  }
+}
+
+const activeStatuses = [
+  "Pending",
+  "Approved",
+  "Pickup Scheduled",
+  "Picked Up",
+  "Received",
+  "Replacement Packed",
+  "Replacement Shipped",
+];
+
+const hasActiveExchange = exchanges.some(
+  (item) =>
+    item.orderId == order.id &&
+    activeStatuses.includes(item.status)
+);
+
+if (hasActiveExchange) {
+  return res.status(400).json({
+    success: false,
+    message:
+      "An exchange request already exists for this order.",
+  });
+}
+
     res.json({
       success: true,
       order,
@@ -106,6 +152,26 @@ router.get("/:orderId/items", async (req, res) => {
     const data = await shopifyGet(`orders/${orderId}.json`);
 
     const order = data.order;
+
+    let exchanges = [];
+
+if (fs.existsSync(exchangeFile)) {
+  const data = fs.readFileSync(exchangeFile, "utf8");
+
+  if (data.trim()) {
+    exchanges = JSON.parse(data);
+  }
+}
+
+const activeStatuses = [
+  "Pending",
+  "Approved",
+  "Pickup Scheduled",
+  "Picked Up",
+  "Received",
+  "Replacement Packed",
+  "Replacement Shipped",
+];
 
     const items = await Promise.all(
 
@@ -136,17 +202,36 @@ router.get("/:orderId/items", async (req, res) => {
 
         }
 
-        return {
 
-          lineItemId: item.id,
-          productId: item.product_id,
-          variantId: item.variant_id,
-          title: item.title,
-          variantTitle: item.variant_title,
-          quantity: item.quantity,
-          image,
+const alreadyRequested = exchanges.some((exchange) => {
+  console.log(
+    "Exchange LineItem:",
+    exchange.lineItemId,
+    "Shopify Item:",
+    item.id,
+    "Status:",
+    exchange.status
+  );
 
-        };
+  return (
+    Number(exchange.lineItemId) === Number(item.id) &&
+    activeStatuses.includes(exchange.status)
+  );
+});
+
+console.log("Already Requested:", alreadyRequested);
+
+return {
+  lineItemId: item.id,
+  productId: item.product_id,
+  variantId: item.variant_id,
+  title: item.title,
+  variantTitle: item.variant_title,
+  quantity: item.quantity,
+  image,
+
+  alreadyRequested,
+};
 
       })
 
