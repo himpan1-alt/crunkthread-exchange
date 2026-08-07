@@ -5,6 +5,7 @@ import SizeSelector, { StockBanner } from "./SizeSelector";
 import ExchangeReason from "./ExchangeReason";
 import ContinueButton from "./ContinueButton";
 
+
 type Item = {
   lineItemId: number;
   productId: number;
@@ -16,6 +17,7 @@ type Item = {
   orderNumber?: string;
   orderDate?: string;
   email?: string;
+  alreadyRequested?: boolean;
 };
 
 type Props = {
@@ -119,14 +121,39 @@ export default function OrderItems({
                     </div>
                   </div>
 
-                  <button
-                    type="button"
-                    onClick={() => onSelect(item)}
-                    className="mt-5 inline-flex items-center gap-2 h-12 px-5 rounded-xl bg-black text-white font-semibold hover:bg-neutral-900 transition-all duration-200 hover:-translate-y-0.5"
-                  >
-                    <ArrowLeftRight className="w-4 h-4 text-[#0AB3A6]" />
-                    Exchange This Product
-                  </button>
+                  {item.alreadyRequested ? (
+
+  <div className="mt-5 inline-flex items-center gap-2 rounded-xl border border-neutral-200 bg-neutral-100 px-5 py-3 text-sm font-semibold text-neutral-500">
+
+    ✓ Exchange Already Requested
+
+  </div>
+
+) : (
+
+  <button
+    onClick={() => onSelect(item)}
+    className="
+      mt-5
+      inline-flex
+      items-center
+      gap-2
+      h-12
+      px-5
+      rounded-xl
+      bg-black
+      text-white
+      font-semibold
+      hover:bg-neutral-900
+      transition-all
+      duration-200
+      hover:-translate-y-0.5
+    "
+  >
+    ↔ Exchange This Product
+  </button>
+
+)}
                 </div>
 
                 {/* Right meta */}
