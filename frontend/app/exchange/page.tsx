@@ -11,6 +11,7 @@ import {
   Tag,
   Wallet,
   CircleX,
+  RefreshCw,
 } from "lucide-react";
 const API_URL = process.env.NEXT_PUBLIC_API_URL!;
 
@@ -367,7 +368,7 @@ setExchangeSuccess(true);
   <div className="mx-auto mt-2 mb-8 h-px w-20 bg-gradient-to-r from-transparent via-neutral-300 to-transparent" />
 
   <h2 className="mt-2 text-2xl sm:text-3xl font-semibold tracking-[0.04em] md:tracking-[0.08em] text-neutral-900">
-    Official Exchange Portal
+  EXCHANGE PORTAL
   </h2>
 
   <p className="mt-4 max-w-lg mx-auto text-[15px] sm:text-[16px] md:text-[17px] leading-7 text-neutral-500">
@@ -530,79 +531,471 @@ setExchangeSuccess(true);
   </div>
 )}
 
-<div className="mt-12 overflow-hidden rounded-[32px] border border-neutral-200 bg-white">
+{/* =========================
+    EXCHANGE POLICY
+========================= */}
 
-  <div className="px-5 sm:px-8 md:px-10 pt-10 md:pt-12 pb-8 md:pb-10 text-center">
+<div className="mt-12 overflow-hidden rounded-[32px] border border-neutral-200 bg-white shadow-[0_20px_60px_rgba(0,0,0,0.05)]">
 
-    <span className="text-xs uppercase tracking-[0.45em] text-neutral-400">
+  {/* Header */}
+  <div className="px-5 sm:px-8 md:px-10 pt-12 md:pt-16 pb-10 text-center">
+
+    <span className="text-xs uppercase tracking-[0.5em] text-neutral-400">
       POLICY
     </span>
 
-    <h2 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-black">
+    <h2 className="mt-5 text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-black">
       Exchange Policy
     </h2>
 
-    <p className="mx-auto mt-5 max-w-2xl text-[16px] leading-8 text-neutral-500">
-      Please review these guidelines before submitting your exchange request.
+    <p className="mx-auto mt-6 max-w-2xl text-[15px] sm:text-[16px] leading-8 text-neutral-500">
+      Please review these guidelines carefully before submitting your
+      exchange request.
     </p>
 
-    <div className="mx-auto mt-8 h-px w-24 bg-neutral-300"></div>
+    <div className="mx-auto mt-9 h-px w-24 bg-neutral-300" />
 
   </div>
 
-  <div className="divide-y divide-neutral-200">
 
-    <div className="px-10 py-8">
-      <h3 className="text-lg font-semibold text-black">
-        7 Days Exchange Window
-      </h3>
+  {/* Accordions */}
+  <div className="px-4 sm:px-6 md:px-10 pb-10 space-y-4">
 
-      <p className="mt-3 text-[15px] leading-7 text-neutral-500">
-        Exchange requests must be submitted within <strong>7 days</strong> of delivery.
-      </p>
-    </div>
 
-    <div className="px-10 py-8">
-      <h3 className="text-lg font-semibold text-black">
-        Size Exchange Only
-      </h3>
+    {/* 1. 7 DAYS */}
+    <details className="group rounded-2xl border border-neutral-200 bg-white overflow-hidden">
 
-      <p className="mt-3 text-[15px] leading-7 text-neutral-500">
-        Only size exchanges are allowed. Product design or colour cannot be changed.
-      </p>
-    </div>
+      <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 sm:px-7 py-6">
 
-    <div className="px-10 py-8">
-      <h3 className="text-lg font-semibold text-black">
-        Original Condition
-      </h3>
+        <div className="flex items-center gap-5">
 
-      <p className="mt-3 text-[15px] leading-7 text-neutral-500">
-        Products must be unused, unwashed and returned with all original tags.
-      </p>
-    </div>
+          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-neutral-100">
+            <Clock3 className="h-6 w-6 text-black" />
+          </div>
 
-    <div className="px-10 py-8">
-      <h3 className="text-lg font-semibold text-black">
-        Exchange Fee
-      </h3>
+          <span className="text-lg sm:text-xl font-semibold text-black">
+            7 Days Exchange Window
+          </span>
 
-      <p className="mt-3 text-[15px] leading-7 text-neutral-500">
-        Rs.149 includes reverse pickup and reshipping.
-      </p>
-    </div>
+        </div>
 
-    <div className="border-t border-red-200 bg-red-50/60 px-5 sm:px-8 md:px-10 py-6 md:py-8">
+        <span className="text-2xl text-black transition-transform duration-200 group-open:rotate-180">
+          ↓
+        </span>
 
-      <h3 className="text-lg font-semibold text-red-700">
-        Not Eligible
-      </h3>
+      </summary>
 
-      <p className="mt-3 text-[15px] leading-7 text-red-600">
-        Customized products are not eligible for exchange.
-      </p>
+      <div className="border-t border-neutral-100 px-5 sm:px-7 pb-7 pt-5">
 
-    </div>
+        <p className="text-[15px] leading-7 text-neutral-600">
+          We accept <strong className="text-black">
+            size exchange requests within 7 days
+          </strong> from the date your order is delivered.
+        </p>
+
+        <ul className="mt-4 list-disc space-y-2 pl-5 text-[15px] leading-7 text-neutral-600">
+          <li>We do not offer returns.</li>
+          <li>
+            Replacement/exchange is available only for size-related issues.
+          </li>
+          <li>
+            Customized products are not eligible for return or exchange.
+          </li>
+          <li>
+            Exchange requests are subject to product availability.
+          </li>
+        </ul>
+
+      </div>
+
+    </details>
+
+
+    {/* 2. SIZE EXCHANGE */}
+    <details className="group rounded-2xl border border-neutral-200 bg-white overflow-hidden">
+
+      <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 sm:px-7 py-6">
+
+        <div className="flex items-center gap-5">
+
+          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-neutral-100">
+            <Ruler className="h-6 w-6 text-black" />
+          </div>
+
+          <span className="text-lg sm:text-xl font-semibold text-black">
+            Size Exchange Only
+          </span>
+
+        </div>
+
+        <span className="text-2xl text-black transition-transform duration-200 group-open:rotate-180">
+          ↓
+        </span>
+
+      </summary>
+
+      <div className="border-t border-neutral-100 px-5 sm:px-7 pb-7 pt-5">
+
+        <p className="text-[15px] leading-7 text-neutral-600">
+          We strongly recommend checking the size chart carefully before
+          placing your order.
+        </p>
+
+        <p className="mt-4 text-[15px] leading-7 text-neutral-600">
+          We can accept exchange requests for a maximum of
+          <strong className="text-black"> two products per order.</strong>
+        </p>
+
+        <p className="mt-4 text-[15px] leading-7 text-neutral-600">
+          If you are unsure about your size, please contact us before placing
+          your order.
+        </p>
+
+      </div>
+
+    </details>
+
+
+    {/* 3. ORIGINAL CONDITION */}
+    <details className="group rounded-2xl border border-neutral-200 bg-white overflow-hidden">
+
+      <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 sm:px-7 py-6">
+
+        <div className="flex items-center gap-5">
+
+          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-neutral-100">
+            <Tag className="h-6 w-6 text-black" />
+          </div>
+
+          <span className="text-lg sm:text-xl font-semibold text-black">
+            Original Condition
+          </span>
+
+        </div>
+
+        <span className="text-2xl text-black transition-transform duration-200 group-open:rotate-180">
+          ↓
+        </span>
+
+      </summary>
+
+      <div className="border-t border-neutral-100 px-5 sm:px-7 pb-7 pt-5">
+
+        <p className="text-[15px] leading-7 text-neutral-600">
+          To be eligible for an exchange, the product must be:
+        </p>
+
+        <ul className="mt-4 list-disc space-y-2 pl-5 text-[15px] leading-7 text-neutral-600">
+          <li>Unused</li>
+          <li>Unwashed</li>
+          <li>In its original condition</li>
+          <li>With all original tags attached</li>
+          <li>Properly packed with the original packaging</li>
+        </ul>
+
+        <p className="mt-4 text-[15px] leading-7 text-neutral-600">
+          Products showing signs of use, washing, damage or alteration may
+          not be accepted.
+        </p>
+
+      </div>
+
+    </details>
+
+
+    {/* 4. WRONG / DAMAGED */}
+    <details className="group rounded-2xl border border-neutral-200 bg-white overflow-hidden">
+
+      <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 sm:px-7 py-6">
+
+        <div className="flex items-center gap-5">
+
+          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-neutral-100">
+            <CircleX className="h-6 w-6 text-black" />
+          </div>
+
+          <span className="text-lg sm:text-xl font-semibold text-black">
+            Wrong, Damaged or Misprinted Items
+          </span>
+
+        </div>
+
+        <span className="text-2xl text-black transition-transform duration-200 group-open:rotate-180">
+          ↓
+        </span>
+
+      </summary>
+
+      <div className="border-t border-neutral-100 px-5 sm:px-7 pb-7 pt-5">
+
+        <p className="text-[15px] leading-7 text-neutral-600">
+          If you receive a wrong, defective, damaged or misprinted product,
+          you must record a
+          <strong className="text-black">
+            {" "}continuous unpacking/unboxing video
+          </strong>
+          while opening the package.
+        </p>
+
+        <p className="mt-4 text-[15px] leading-7 text-neutral-600">
+          The video should clearly show the package and the product received.
+        </p>
+
+        <p className="mt-4 text-[15px] leading-7 text-red-600">
+          <strong>
+            Without a valid unpacking video, we will not be able to accept or
+            process a replacement request.
+          </strong>
+        </p>
+
+      </div>
+
+    </details>
+
+
+    {/* 5. EXCHANGE PROCESS */}
+    <details className="group rounded-2xl border border-neutral-200 bg-white overflow-hidden">
+
+      <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 sm:px-7 py-6">
+
+        <div className="flex items-center gap-5">
+
+          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-neutral-100">
+            <RefreshCw className="h-6 w-6 text-black" />
+          </div>
+
+          <span className="text-lg sm:text-xl font-semibold text-black">
+            Exchange Process & Fee
+          </span>
+
+        </div>
+
+        <span className="text-2xl text-black transition-transform duration-200 group-open:rotate-180">
+          ↓
+        </span>
+
+      </summary>
+
+      <div className="border-t border-neutral-100 px-5 sm:px-7 pb-7 pt-5">
+
+        <p className="text-[15px] leading-7 text-neutral-600">
+          Customers can submit their exchange request directly through our
+          <strong className="text-black"> Self Exchange Portal.</strong>
+        </p>
+
+        <p className="mt-4 text-[15px] leading-7 text-neutral-600">
+          Once your exchange request is approved,
+          <strong className="text-black">
+            {" "}we will arrange the reverse pickup from your address.
+          </strong>
+        </p>
+
+        <p className="mt-4 text-[15px] leading-7 text-neutral-600">
+          After we receive and inspect the product, your replacement will be
+          processed and shipped.
+        </p>
+
+        <p className="mt-4 text-[15px] leading-7 text-neutral-600">
+          New tracking details will be shared with you once the replacement
+          is dispatched.
+        </p>
+
+        <div className="mt-6 rounded-xl bg-neutral-50 border border-neutral-200 p-5">
+
+          <p className="font-semibold text-black">
+            Please Note
+          </p>
+
+          <ul className="mt-3 list-disc space-y-2 pl-5 text-[15px] leading-7 text-neutral-600">
+            <li>
+              An <strong className="text-black">exchange fee is applicable</strong>
+              {" "}Exchange Fee
+Rs.149 includes reverse pickup and reshipping.
+            </li>
+            <li>
+              The product must be unused, unwashed and have original tags
+              and packaging intact.
+            </li>
+            <li>
+              Exchange requests are subject to the terms of this policy.
+            </li>
+          </ul>
+
+        </div>
+
+      </div>
+
+    </details>
+
+
+    {/* 6. REFUND */}
+    <details className="group rounded-2xl border border-neutral-200 bg-white overflow-hidden">
+
+      <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 sm:px-7 py-6">
+
+        <div className="flex items-center gap-5">
+
+          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-neutral-100">
+            <Wallet className="h-6 w-6 text-black" />
+          </div>
+
+          <span className="text-lg sm:text-xl font-semibold text-black">
+            Refund Policy
+          </span>
+
+        </div>
+
+        <span className="text-2xl text-black transition-transform duration-200 group-open:rotate-180">
+          ↓
+        </span>
+
+      </summary>
+
+      <div className="border-t border-neutral-100 px-5 sm:px-7 pb-7 pt-5">
+
+        <p className="text-[15px] leading-7 text-neutral-600">
+          <strong className="text-black">
+            We do not offer refunds.
+          </strong>
+        </p>
+
+        <p className="mt-4 text-[15px] leading-7 text-neutral-600">
+          If you experience an issue with your order, we will work to resolve
+          it through a replacement wherever the issue is covered under this
+          policy.
+        </p>
+
+        <p className="mt-4 text-[15px] leading-7 text-neutral-600">
+          Refund requests will not be accepted for:
+        </p>
+
+        <ul className="mt-3 list-disc space-y-2 pl-5 text-[15px] leading-7 text-neutral-600">
+          <li>Size issues</li>
+          <li>Change of mind</li>
+          <li>Incorrect size selection</li>
+          <li>Product preferences</li>
+          <li>Orders that have already been shipped</li>
+        </ul>
+
+      </div>
+
+    </details>
+
+
+    {/* 7. CUSTOMER RESPONSIBILITY */}
+    <details className="group rounded-2xl border border-neutral-200 bg-white overflow-hidden">
+
+      <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 sm:px-7 py-6">
+
+        <div className="flex items-center gap-5">
+
+          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-neutral-100">
+            <Clock3 className="h-6 w-6 text-black" />
+          </div>
+
+          <span className="text-lg sm:text-xl font-semibold text-black">
+            Customer Responsibility & RTO
+          </span>
+
+        </div>
+
+        <span className="text-2xl text-black transition-transform duration-200 group-open:rotate-180">
+          ↓
+        </span>
+
+      </summary>
+
+      <div className="border-t border-neutral-100 px-5 sm:px-7 pb-7 pt-5">
+
+        <p className="text-[15px] leading-7 text-neutral-600">
+          Customers are responsible for providing accurate delivery address,
+          phone number, billing details and shipping details.
+        </p>
+
+        <p className="mt-4 text-[15px] leading-7 text-neutral-600">
+          Customers must also ensure that someone is available to receive the
+          order.
+        </p>
+
+        <p className="mt-4 text-[15px] leading-7 text-neutral-600">
+          Failed delivery attempts caused by an incorrect address, incorrect
+          contact information, customer unavailability or refusal to accept
+          the shipment may result in the package being returned to origin
+          <strong className="text-black"> (RTO).</strong>
+        </p>
+
+        <p className="mt-4 text-[15px] leading-7 text-neutral-600">
+          Any dispute relating to non-delivery, delivery attempts, order
+          refusal, cancellation after shipment or RTO will be reviewed on the
+          basis of the
+          <strong className="text-black">
+            {" "}official courier tracking information.
+          </strong>
+        </p>
+
+      </div>
+
+    </details>
+
+
+    {/* 8. CUSTOMIZED */}
+    <details className="group rounded-2xl border border-red-200 bg-red-50/40 overflow-hidden">
+
+      <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 sm:px-7 py-6">
+
+        <div className="flex items-center gap-5">
+
+          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white">
+            <CircleX className="h-6 w-6 text-red-600" />
+          </div>
+
+          <span className="text-lg sm:text-xl font-semibold text-red-700">
+            Customized Products
+          </span>
+
+        </div>
+
+        <span className="text-2xl text-red-700 transition-transform duration-200 group-open:rotate-180">
+          ↓
+        </span>
+
+      </summary>
+
+      <div className="border-t border-red-200 px-5 sm:px-7 pb-7 pt-5">
+
+        <p className="text-[15px] leading-7 text-red-700">
+          <strong>
+            Customized products are not eligible for return, refund or exchange.
+          </strong>
+        </p>
+
+        <p className="mt-4 text-[15px] leading-7 text-red-700">
+          This includes products that have been specifically customized or
+          personalized according to the customer's requirements.
+        </p>
+
+      </div>
+
+    </details>
+
+  </div>
+
+
+  {/* Exchange Now */}
+  <div className="px-5 sm:px-8 md:px-10 pb-12 text-center">
+
+    <button
+      type="button"
+      onClick={() =>
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        })
+      }
+      className="inline-flex items-center justify-center rounded-xl bg-black px-8 py-4 text-sm font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-neutral-800"
+    >
+      Exchange Now
+    </button>
 
   </div>
 
