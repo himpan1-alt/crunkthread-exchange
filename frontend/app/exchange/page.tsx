@@ -602,6 +602,9 @@ setExchangeSuccess(true);
             Customized products are not eligible for return or exchange.
           </li>
           <li>
+            Special Notice: Any item purchased during a special sale or offer period is not eligible for return or exchange.
+          </li>
+          <li>
             Exchange requests are subject to product availability.
           </li>
         </ul>
