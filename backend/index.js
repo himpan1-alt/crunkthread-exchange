@@ -19,6 +19,7 @@ const paymentRoutes = require("./routes/payment");
 const { sendEmail } = require("./services/emailService");
 
 const app = express();
+app.set("trust proxy", 1);
 
 /* =========================
    Middleware
