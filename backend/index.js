@@ -10,6 +10,7 @@ const bcrypt = require("bcryptjs");
 const rateLimit = require("express-rate-limit");
 const helmet = require("helmet");
 const auth = require("./middleware/auth");
+const supabase = require("./supabase");
 
 const orderRoutes = require("./routes/orders");
 const inventoryRoutes = require("./routes/inventory");
@@ -53,6 +54,8 @@ console.log(
 /* =========================
    Home Route
 ========================= */
+
+
 
 app.get("/", (req, res) => {
   res.json({

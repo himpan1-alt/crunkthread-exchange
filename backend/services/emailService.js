@@ -2,15 +2,7 @@ const axios = require("axios");
 
 async function sendEmail({ to, subject, html }) {
   try {
-    console.log("📧 Sending Brevo email...");
-    console.log("To:", to);
-    console.log("From:", process.env.BREVO_FROM_EMAIL);
-    console.log(
-      "Brevo API Key:",
-      process.env.BREVO_API_KEY ? "LOADED" : "MISSING"
-    );
-
-    const response = await axios.post(
+    await axios.post(
       "https://api.brevo.com/v3/smtp/email",
       {
         sender: {
@@ -25,6 +17,7 @@ async function sendEmail({ to, subject, html }) {
         ],
 
         subject,
+
         htmlContent: html,
       },
       {
@@ -33,36 +26,15 @@ async function sendEmail({ to, subject, html }) {
           "content-type": "application/json",
           "api-key": process.env.BREVO_API_KEY,
         },
-
-        timeout: 15000,
       }
     );
 
-    console.log("✅ Brevo Email Sent Successfully");
-    console.log("Message ID:", response.data?.messageId);
-
-    return {
-      success: true,
-      messageId: response.data?.messageId,
-    };
-
+    console.log("✅ Email Sent:", to);
   } catch (err) {
-    console.error("❌ BREVO EMAIL ERROR");
-
     console.error(
-      "Status:",
-      err.response?.status || "NO STATUS"
-    );
-
-    console.error(
-      "Response:",
+      "❌ Email Error:",
       err.response?.data || err.message
     );
-
-    return {
-      success: false,
-      error: err.response?.data || err.message,
-    };
   }
 }
 

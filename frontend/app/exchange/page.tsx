@@ -56,6 +56,15 @@ export default function ExchangePage() {
   const [exchangeSuccess, setExchangeSuccess] = useState(false);
   const [exchangeId, setExchangeId] = useState("");
 
+  // Store verified Razorpay payment details so the exchange record
+  // can permanently retain proof of the ₹149 payment in Supabase.
+  const [paymentDetails, setPaymentDetails] = useState<{
+    razorpayOrderId: string;
+    razorpayPaymentId: string;
+    paymentStatus: string;
+    exchangeFee: number;
+  } | null>(null);
+
   const verifyResultRef = useRef<HTMLDivElement>(null);
 
   async function verifyOrder() {
@@ -75,6 +84,7 @@ export default function ExchangePage() {
   setStockStatus(null);
   setReason("");
   setOtherReason("");
+  setPaymentDetails(null);
 
     try {
   const response = await fetch(
@@ -232,7 +242,23 @@ async function startPayment() {
       return;
     }
 
-    await submitExchange();
+    // Payment has been cryptographically verified by the backend.
+    // Keep the identifiers with this exchange request.
+    setPaymentDetails({
+      razorpayOrderId: response.razorpay_order_id,
+      razorpayPaymentId: response.razorpay_payment_id,
+      paymentStatus: "paid",
+      exchangeFee: Number(data.amount) / 100,
+    });
+
+    // Pass the verified payment details directly to the submit function
+    // so the request is saved with a durable payment reference.
+    await submitExchange({
+      razorpayOrderId: response.razorpay_order_id,
+      razorpayPaymentId: response.razorpay_payment_id,
+      paymentStatus: "paid",
+      exchangeFee: Number(data.amount) / 100,
+    });
 
   } catch (err) {
     console.error(err);
@@ -256,7 +282,9 @@ async function startPayment() {
   }
 }
 
-async function submitExchange() {
+async function submitExchange(
+  verifiedPayment = paymentDetails
+) {
   if (!selectedItem) return;
 
   try {
@@ -288,6 +316,12 @@ async function submitExchange() {
   newSize: selectedSize,
 
   reason: reason === "Other" ? otherReason : reason,
+
+  // Verified Razorpay payment information.
+  razorpayOrderId: verifiedPayment?.razorpayOrderId ?? null,
+  razorpayPaymentId: verifiedPayment?.razorpayPaymentId ?? null,
+  paymentStatus: verifiedPayment?.paymentStatus ?? null,
+  exchangeFee: verifiedPayment?.exchangeFee ?? 149,
 }),
       }
     );

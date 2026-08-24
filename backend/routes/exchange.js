@@ -3,6 +3,7 @@ const fs = require("fs");
 const path = require("path");
 const { sendEmail } = require("../services/emailService");
 const auth = require("../middleware/auth");
+const supabase = require("../supabase");
 
 const router = express.Router();
 
@@ -101,6 +102,76 @@ timeline: [
         },
       ],
     };
+
+    // =========================
+    // SAVE EXCHANGE TO SUPABASE
+    // =========================
+
+    const { error: supabaseInsertError } = await supabase
+      .from("exchange_requests")
+      .insert({
+        exchange_id: exchange.exchangeId,
+        order_number: String(exchange.orderNumber || ""),
+        customer_email: exchange.customerEmail || null,
+
+        product_id: exchange.productId
+          ? String(exchange.productId)
+          : null,
+
+        variant_id: exchange.variantId
+          ? String(exchange.variantId)
+          : null,
+
+        line_item_id: exchange.lineItemId
+          ? String(exchange.lineItemId)
+          : null,
+
+        product_title: exchange.productTitle || null,
+
+        old_size: exchange.currentSize || null,
+        new_size: exchange.newSize || null,
+
+        reason: exchange.reason || null,
+
+        status: exchange.status,
+
+        exchange_fee: Number(req.body.exchangeFee || 0),
+
+        razorpay_order_id:
+          req.body.razorpayOrderId || null,
+
+        razorpay_payment_id:
+          req.body.razorpayPaymentId || null,
+
+        payment_status:
+          req.body.paymentStatus || null,
+
+        tracking_number:
+          exchange.trackingNumber || null,
+
+        admin_notes:
+          exchange.adminNotes || null,
+
+        request_data: exchange,
+
+        created_at: exchange.createdAt,
+        updated_at: exchange.createdAt
+      });
+
+    if (supabaseInsertError) {
+      console.error(
+        "❌ SUPABASE SAVE ERROR:",
+        supabaseInsertError
+      );
+
+      return res.status(500).json({
+        success: false,
+        message:
+          "Exchange request could not be securely saved."
+      });
+    }
+
+    console.log("✅ Exchange saved to Supabase");
 
     exchanges.push(exchange);
 
