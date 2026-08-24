@@ -200,6 +200,8 @@ if (!exchange.customerEmail) {
   console.log("❌ customerEmail missing");
 }
 
+console.log("📧 CUSTOMER EXCHANGE EMAIL START:", exchange.customerEmail);
+
 await sendEmail({
   to: exchange.customerEmail,
   subject: `Exchange Request Received - Order #${exchange.orderNumber}`,
@@ -222,11 +224,15 @@ await sendEmail({
   `,
 });
 
+console.log("📧 CUSTOMER EXCHANGE EMAIL FINISHED");
+
 /*
 ========================================
 ADMIN EMAIL
 ========================================
 */
+
+console.log("📧 ADMIN EXCHANGE EMAIL START:", process.env.ADMIN_EMAIL);
 
 await sendEmail({
   to: process.env.ADMIN_EMAIL,
@@ -243,6 +249,8 @@ await sendEmail({
     <p><strong>Reason:</strong> ${exchange.reason}</p>
   `,
 });
+
+console.log("📧 ADMIN EXCHANGE EMAIL FINISHED");
 
 res.json({
   success: true,
