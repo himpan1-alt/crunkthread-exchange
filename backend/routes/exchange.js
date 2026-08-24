@@ -273,21 +273,113 @@ GET ALL EXCHANGES
 ========================================
 */
 
-router.get("/all", auth, (req, res) => {
+router.get("/all", auth, async (req, res) => {
   try {
-    if (!fs.existsSync(filePath)) {
-      return res.json([]);
+    const { data, error } = await supabase
+      .from("exchange_requests")
+      .select("*")
+      .order("created_at", { ascending: false });
+
+    if (error) {
+      console.error("❌ SUPABASE GET ALL ERROR:", error);
+
+      return res.status(500).json({
+        success: false,
+        message: "Unable to load exchange requests.",
+      });
     }
 
-    const data = fs.readFileSync(filePath, "utf8");
+    const exchanges = (data || []).map((row) => ({
+      ...(row.request_data || {}),
 
-    if (!data.trim()) {
-      return res.json([]);
-    }
+      exchangeId: row.exchange_id,
+      createdAt: row.created_at,
 
-    res.json(JSON.parse(data));
+      status: row.status,
+
+      orderId:
+        row.request_data?.orderId ??
+        row.request_data?.orderID ??
+        null,
+
+      orderNumber: row.order_number,
+
+      customerEmail: row.customer_email,
+
+      productId: row.product_id
+        ? Number(row.product_id)
+        : row.request_data?.productId ?? null,
+
+      productTitle:
+        row.product_title ??
+        row.request_data?.productTitle ??
+        "",
+
+      lineItemId: row.line_item_id
+        ? Number(row.line_item_id)
+        : row.request_data?.lineItemId ?? null,
+
+      variantId: row.variant_id
+        ? Number(row.variant_id)
+        : row.request_data?.variantId ?? null,
+
+      currentSize:
+        row.old_size ??
+        row.request_data?.currentSize ??
+        "",
+
+      newSize:
+        row.new_size ??
+        row.request_data?.newSize ??
+        "",
+
+      reason:
+        row.reason ??
+        row.request_data?.reason ??
+        "",
+
+      adminNotes:
+        row.admin_notes ??
+        row.request_data?.adminNotes ??
+        "",
+
+      customerNotes:
+        row.request_data?.customerNotes ??
+        "",
+
+      courierName:
+        row.request_data?.courierName ??
+        "",
+
+      pickupDate:
+        row.request_data?.pickupDate ??
+        "",
+
+      pickupTime:
+        row.request_data?.pickupTime ??
+        "",
+
+      trackingNumber:
+        row.tracking_number ??
+        row.request_data?.trackingNumber ??
+        "",
+
+      trackingUrl:
+        row.request_data?.trackingUrl ??
+        "",
+
+      timeline:
+        row.request_data?.timeline ??
+        [],
+    }));
+
+    console.log(
+      `✅ Loaded ${exchanges.length} exchanges from Supabase`
+    );
+
+    res.json(exchanges);
   } catch (err) {
-    console.error(err);
+    console.error("❌ GET ALL EXCHANGES ERROR:", err);
 
     res.status(500).json({
       success: false,
@@ -307,27 +399,96 @@ router.put("/status/:exchangeId", auth, async (req, res) => {
   console.log("🔥 STATUS UPDATE API HIT");
 
   try {
-    if (!fs.existsSync(filePath)) {
-      return res.status(404).json({
-        success: false,
-        message: "No exchange requests found",
-      });
-    }
+    const { data: exchangeRow, error: exchangeFetchError } =
+  await supabase
+    .from("exchange_requests")
+    .select("*")
+    .eq("exchange_id", req.params.exchangeId)
+    .single();
 
-    const exchanges = JSON.parse(
-      fs.readFileSync(filePath, "utf8")
-    );
+if (exchangeFetchError || !exchangeRow) {
+  console.error(
+    "❌ SUPABASE EXCHANGE FETCH ERROR:",
+    exchangeFetchError
+  );
 
-    const exchange = exchanges.find(
-      (item) => item.exchangeId === req.params.exchangeId
-    );
+  return res.status(404).json({
+    success: false,
+    message: "Exchange not found",
+  });
+}
 
-    if (!exchange) {
-      return res.status(404).json({
-        success: false,
-        message: "Exchange not found",
-      });
-    }
+const exchange = {
+  ...(exchangeRow.request_data || {}),
+
+  exchangeId: exchangeRow.exchange_id,
+  createdAt: exchangeRow.created_at,
+  status: exchangeRow.status,
+  orderNumber: exchangeRow.order_number,
+  customerEmail: exchangeRow.customer_email,
+
+  productId:
+    exchangeRow.product_id ??
+    exchangeRow.request_data?.productId,
+
+  productTitle:
+    exchangeRow.product_title ??
+    exchangeRow.request_data?.productTitle,
+
+  lineItemId:
+    exchangeRow.line_item_id ??
+    exchangeRow.request_data?.lineItemId,
+
+  variantId:
+    exchangeRow.variant_id ??
+    exchangeRow.request_data?.variantId,
+
+  currentSize:
+    exchangeRow.old_size ??
+    exchangeRow.request_data?.currentSize,
+
+  newSize:
+    exchangeRow.new_size ??
+    exchangeRow.request_data?.newSize,
+
+  reason:
+    exchangeRow.reason ??
+    exchangeRow.request_data?.reason,
+
+  adminNotes:
+    exchangeRow.admin_notes ??
+    exchangeRow.request_data?.adminNotes ??
+    "",
+
+  customerNotes:
+    exchangeRow.request_data?.customerNotes ??
+    "",
+
+  courierName:
+    exchangeRow.request_data?.courierName ??
+    "",
+
+  pickupDate:
+    exchangeRow.request_data?.pickupDate ??
+    "",
+
+  pickupTime:
+    exchangeRow.request_data?.pickupTime ??
+    "",
+
+  trackingNumber:
+    exchangeRow.tracking_number ??
+    exchangeRow.request_data?.trackingNumber ??
+    "",
+
+  trackingUrl:
+    exchangeRow.request_data?.trackingUrl ??
+    "",
+
+  timeline:
+    exchangeRow.request_data?.timeline ??
+    [],
+};
 
     exchange.status = req.body.status;
 
@@ -389,11 +550,40 @@ if (req.body.pickupDate !== undefined) {
       by: "Admin",
     });
 
-    fs.writeFileSync(
-      filePath,
-      JSON.stringify(exchanges, null, 2),
-      "utf8"
-    );
+    const updatedRequestData = {
+  ...(exchangeRow.request_data || {}),
+  ...exchange,
+  updatedAt: new Date().toISOString(),
+};
+
+const { error: supabaseUpdateError } = await supabase
+  .from("exchange_requests")
+  .update({
+    status: exchange.status,
+    admin_notes: exchange.adminNotes || null,
+    tracking_number: exchange.trackingNumber || null,
+    request_data: updatedRequestData,
+    updated_at: new Date().toISOString(),
+  })
+  .eq("exchange_id", exchange.exchangeId);
+
+if (supabaseUpdateError) {
+  console.error(
+    "❌ SUPABASE STATUS UPDATE ERROR:",
+    supabaseUpdateError
+  );
+
+  return res.status(500).json({
+    success: false,
+    message: "Unable to save exchange status.",
+  });
+}
+
+console.log(
+  "✅ Exchange status saved to Supabase:",
+  exchange.exchangeId,
+  exchange.status
+);
     
     /*
 ========================================
