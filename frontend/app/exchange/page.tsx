@@ -57,7 +57,7 @@ export default function ExchangePage() {
   const [exchangeId, setExchangeId] = useState("");
 
   // Store verified Razorpay payment details so the exchange record
-  // can permanently retain proof of the ₹149 payment in Supabase.
+  // can permanently retain proof of the ₹199 payment in Supabase.
   const [paymentDetails, setPaymentDetails] = useState<{
     razorpayOrderId: string;
     razorpayPaymentId: string;
@@ -321,7 +321,7 @@ async function submitExchange(
   razorpayOrderId: verifiedPayment?.razorpayOrderId ?? null,
   razorpayPaymentId: verifiedPayment?.razorpayPaymentId ?? null,
   paymentStatus: verifiedPayment?.paymentStatus ?? null,
-  exchangeFee: verifiedPayment?.exchangeFee ?? 149,
+  exchangeFee: verifiedPayment?.exchangeFee ?? 199,
 }),
       }
     );
@@ -557,7 +557,7 @@ setExchangeSuccess(true);
     onClick={startPayment}
     className="w-full sm:flex-1 bg-black text-white rounded-xl py-4 text-lg font-semibold whitespace-nowrap"
   >
-    Pay <span className="font-sans">Rs.</span>149 &amp; Submit Exchange
+    Pay <span className="font-sans">Rs.</span>199 &amp; Submit Exchange
   </button>
 
 </div>
@@ -847,7 +847,7 @@ setExchangeSuccess(true);
             <li>
               An <strong className="text-black">exchange fee is applicable</strong>
               {" "}Exchange Fee
-Rs.149 includes reverse pickup and reshipping.
+Rs.199 includes reverse pickup and reshipping.
             </li>
             <li>
               The product must be unused, unwashed and have original tags
